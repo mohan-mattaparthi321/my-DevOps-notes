@@ -1,0 +1,24 @@
+1. Download the Docker image from hub.docker.com
+docker pull mattaparthi/ubuntu16:withssh2.0
+2. Create a new network as below:
+docker network create --subnet 172.20.0.0/16 --gateway 172.20.0.254 ansible_nw
+3.Create three machines as below using the above network.
+docker run --rm -dit --name machine1 --hostname machine1 --network ansible_nw mattaparthi/ubuntu16:withssh2.0
+docker run --rm -dit --name machine2 --hostname machine2 --network ansible_nw mattaparthi/ubuntu16:withssh2.0
+docker run --rm -dit --name machine3 --hostname machine3 --network ansible_nw mattaparthi/ubuntu16:withssh2.0
+docker run --rm -dit --name machine4 --hostname machine3 --network ansible_nw mattaparthi/ubuntu16:withssh2.0
+4. Go in to the machine1
+docker exec -it machine1 /bin/bash
+5.ping machine 2,3,4
+6.Install Anible using below command
+  apt-get install ansible -y
+7. Run ansible --version and you should get response as ansible 2.7.5
+8.Create a file called hosts using following command.
+   nano hosts
+9. Add the following in the hosts file and save it.
+[local]
+localhost
+[servers]
+machine2
+machine3
+machine4
