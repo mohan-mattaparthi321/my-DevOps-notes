@@ -1,0 +1,71 @@
+<!-- ansible  set up -->
+STEP1:- 	UpdateUpdate host files so that controllers  can reach  to all clients  at line number 25
+
+STEP:2		Allow Password  login  and allow root login below steps needs to do both (controller/clients) 
+
+				vi /etc/ssh/sshd_config
+
+				edit passwordAuthenticaion  yes (change to yes)
+
+				edit permit Rootlogin yes
+
+				now service sshd restart
+				password 
+				enter new password
+		 
+
+STEP3		Install Ansible and check the config on controller
+
+				$ sudo apt-get update
+				$ sudo apt-get install software-properties-common
+				$ sudo apt-add-repository --yes --update ppa:ansible/ansible
+				$ sudo apt-get install ansible
+		
+STAP4 		Install phyton and configured client1  ---> phyton will install when ansible install in client
+				
+				apt install phyton-pip
+
+Password less ssh authentication needs to be configured .for this we needs  to generate pub/priv key-pairs and copy  to clients
+
+ssh-keygen enter  
+
+ssh-copy-id root@client1  it will not work
+
+Install phyton and configured client1  ---> phyton will install when ansible install in client
+
+configured client1
+
+10.1.1.61 		controller.local		controller
+10.1.1.101		client1.local			client1
+
+STEP1 below
+
+set up ansible at controller
+
+sudo su -
+
+apt-get update
+
+vi /etc/hostname
+
+controller
+
+vi /etc/hosts
+
+10.1.1.61 		controller.local		controller
+10.1.1.101		client1.local			client1
+
+then reboot
+
+now client machin
+
+vi /etc/hostname
+
+client1
+
+vi /etc/hosts
+
+10.1.1.61 		controller.local		controller
+10.1.1.101		client1.local			client1
+
+then  reboot client
