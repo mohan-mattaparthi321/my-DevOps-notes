@@ -1,0 +1,60 @@
+---
+  -name: create user on web servers
+    hosts: web
+   tasks:
+       - name: create a web Group
+         group:
+             name: webgroup
+             state: present
+       -name: create a web user 1
+       user: >
+           name=webuser1
+           group=webgroup
+           shell=/binbash
+           state: present
+        -name: create a web user 2
+       user: >
+           name=webuser2
+           group=webgroup
+           shell=/binbash
+           state: present         
+  -name: create user on app servers
+   hosts: web
+   tasks:
+       - name: create a app Group
+         group:
+             name: appgroup
+             state: present
+       -name: create a web user 1
+       user: >
+           name=appuser1
+           group=appgroup
+           shell=/binbash
+           state: present
+        -name: create a web user 2
+       user: >
+           name=appuser2
+           group=appgroup
+           shell=/binbash
+           state: present
+           
+  -name: create user on DB servers
+   hosts: web
+   tasks:
+       - name: create a db Group
+         group:
+             name: dbgroup
+             state: present
+       -name: create a db user 1
+       user: >
+           name=dbuser1
+           group=dbgroup
+           shell=/binbash
+           state: present
+        -name: create a web user 2
+       user: >
+           name=dbuser2
+           group=dbgroup
+           shell=/binbash
+           state: present
+           
