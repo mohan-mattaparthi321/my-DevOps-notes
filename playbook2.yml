@@ -1,0 +1,113 @@
+---
+
+  - name: Create Users
+
+    hosts: web
+
+    tasks:
+
+      - name: Create User Test1
+
+        user: >
+
+            name=test1
+
+            state=present
+
+            uid=5001
+
+            home=/home/test1
+
+      - name: Create User Test2
+
+        user: |
+
+            name=Test2
+
+            state=present
+
+            uid=5002
+
+            home=/home/Test2
+
+  - name: Install Nginx Server
+
+    hosts: web
+
+    tasks:
+
+       - name: Install Nginx
+
+         apt: >
+
+           name=nginx
+
+           state=present
+
+       - name: Copy the files to index destination folder.
+
+         copy: >
+
+            src=/tmp/dockertest1/index.html
+
+            dest=/var/www/html/index.nginx-debian.html
+
+            owner=root
+
+            group=root
+
+            mode=0644
+
+       - name: Copy the style files to  destination folder.
+
+         copy: >
+
+            src=/tmp/dockertest1/style.css
+
+            dest=/var/www/html/style.css
+
+            owner=root
+
+            group=root
+
+            mode=0644
+
+       - name: Copy the javascript files to  destination folder.
+
+         copy: >
+
+            src=/tmp/dockertest1/scorekeeper.js
+
+            dest=/var/www/html/scorekeeper.js
+
+            owner=root
+
+            group=root
+
+            mode=0644
+
+       - name: restart nginx
+
+         command: service nginx restart
+
+# ---
+
+#   - name: Download a Git Repo
+
+#     hosts: web
+
+#     tasks:
+
+
+
+#       - name: Download Git Repo
+
+#           git:
+
+#           repo: https://github.com/mavrick202/dockertest1.git
+
+#             version: master
+
+#             dest: /opt/private-repo
+
+#             accept_hostkey: yes
