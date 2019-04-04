@@ -136,7 +136,7 @@ call mvn clean install -Dmaven.test.skip=true
 
 @REM Login into Cloud Foundry
 
-call cf login --skip-ssl-validation -a %LoginURL% -o TVE-Programming -s COMPASS-%Environment% -u 206561642 -p Feb@2019
+call cf login --skip-ssl-validation -a %LoginURL% -o TVE-Programming -s COMPASS-%Environment% -u mattaparthi -p devops 
 
 
 
